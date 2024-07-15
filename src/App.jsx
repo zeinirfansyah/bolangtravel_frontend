@@ -1,9 +1,18 @@
-import "./App.css";
+import { Suspense } from "react";
+import { Layout } from "./layouts/Layout";
+import { Login } from "./pages/auth/Login";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <h1>Hai</h1>
+      <Layout>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </Suspense>
+      </Layout>
     </>
   );
 }
