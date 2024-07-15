@@ -1,15 +1,30 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const Header = () => {
+  const location = useLocation();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const backgroundColor = () => {
+    switch (location.pathname) {
+      case "/login":
+        return "bg-slate-100";
+      case "/register":
+        return "bg-slate-100";
+      default:
+        return "bg-white";
+    }
+  };
+
   return (
-    <header className="fixed left-0 right-0 top-0 z-10 bg-white shadow">
+    <header
+      className={`fixed left-0 right-0 top-0 z-10 shadow  ${backgroundColor()}`}
+    >
       <div className="max-w-7xl mx-auto">
         <nav className="Navbar lg:flex justify-between gap-20 items-center py-6 mx-4">
           <div className="flex flex-col lg:flex-row lg:gap-12">
