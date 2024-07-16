@@ -49,14 +49,14 @@ export const Login = () => {
                     </p>
                   </div>
                   <div className="space-y-1">
-                    <label htmlFor="email" className="text-slate-400">
-                      Email
+                    <label htmlFor="username" className="text-slate-400">
+                      Username
                     </label>
                     <Input
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="Enter your email"
+                      type="username"
+                      id="username"
+                      name="username"
+                      placeholder="Enter your username"
                     />
                   </div>
                   <div className="space-y-1">
@@ -77,7 +77,7 @@ export const Login = () => {
                     >
                       Login
                     </Button>
-                    <div className="flex justify-between w-full my-4">
+                    <div className="flex flex-col lg:flex-row gap-4 items-center justify-between w-full my-4">
                       <Link
                         to="/register"
                         className="text-primary hover:text-secondary"
