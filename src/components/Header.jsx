@@ -22,9 +22,7 @@ export const Header = () => {
   };
 
   return (
-    <header
-      className={`fixed left-0 right-0 top-0 z-10 shadow  ${backgroundColor()}`}
-    >
+    <header className={`sticky top-0 z-10 shadow  ${backgroundColor()}`}>
       <div className="max-w-7xl mx-auto">
         <nav className="Navbar lg:flex justify-between gap-20 items-center py-6 mx-4">
           <div className="flex flex-col lg:flex-row lg:gap-12">
@@ -36,7 +34,7 @@ export const Header = () => {
               </Link>
               <div className="flex items-end justify-end gap-2">
                 <button
-                  className="sm:hidden hover:bg-white px-3 py-1 transition-all  duration-500 rounded-lg cursor-pointer shadow order-2"
+                  className=" lg:hidden hover:bg-white px-3 py-1 transition-all  duration-500 rounded-lg cursor-pointer shadow order-2"
                   onClick={toggleMenu}
                   type="button"
                 >
