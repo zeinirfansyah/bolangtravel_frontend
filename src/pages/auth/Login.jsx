@@ -11,14 +11,14 @@ export const Login = () => {
     <>
       <div className="bg-slate-100">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col mx-auto items-center justify-center min-h-screen max-w-[80vw] lg:max-w-[60vw] mt-8">
+          <div className="flex flex-col mx-auto items-center justify-center min-h-screen max-w-[80vw] lg:max-w-[60vw] lg:relative lg:-top-12">
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{
                 duration: 0.3,
               }}
-              className="flex flex-col lg:flex-row justify-center items-center border-2 w-full rounded-3xl bg-white"
+              className="flex flex-col lg:flex-row justify-center items-center border-2 w-full rounded-3xl bg-white my-12"
             >
               <div className="w-full lg:w-1/2 h-full">
                 <motion.img
