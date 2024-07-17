@@ -12,7 +12,7 @@ export const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <section id="content" className="min-h-screen">
+      <section id="content" className="min-h-screen text-dark">
         {children}
       </section>
       <Footer />
