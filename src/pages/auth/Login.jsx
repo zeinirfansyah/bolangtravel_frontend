@@ -7,6 +7,7 @@ import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
 import { useState } from "react";
 import { useAuthStore } from "../../stores/authStore";
+import Toast from "../../components/ui/Toast";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ export const Login = () => {
       }
     } catch (error) {
       setError("Invalid username or password");
+      navigate("/login/#error");
       console.log(error);
     }
   };
@@ -50,6 +52,9 @@ export const Login = () => {
               }}
               className="flex flex-col lg:flex-row justify-center items-center border-2 w-full rounded-3xl bg-white my-12"
             >
+              <div id="error">
+                {error && <Toast text={error} backgroundColor="bg-red-200" />}
+              </div>
               <div className="w-full lg:w-1/2 h-full">
                 <motion.img
                   initial={{ opacity: 0, scale: 0.5 }}
