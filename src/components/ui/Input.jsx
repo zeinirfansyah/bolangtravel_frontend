@@ -6,6 +6,7 @@ export const Input = ({ ...props }) => {
     <>
       <input
         type={props.type}
+        value={props.value}
         id={props.id}
         name={props.name}
         required={props.required}
@@ -29,6 +30,5 @@ Input.propTypes = {
   maxLength: PropTypes.number,
   size: PropTypes.number,
   placeholder: PropTypes.string,
-  className: PropTypes.string,
-  onChange: PropTypes.func,
+  className: PropTypes.string
 };
