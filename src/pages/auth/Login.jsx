@@ -1,12 +1,42 @@
 import img_pagoda from "../../assets/images/pagoda.jpg";
 
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
+import { useState } from "react";
+import { useAuthStore } from "../../stores/authStore";
 
 export const Login = () => {
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { login, user, token } = useAuthStore((state) => state);
+
+  if (token) {
+    return <Navigate to={user?.role === "admin" ? "/admin" : "/"} replace />;
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await login(username, password);
+
+      if (user?.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      setError("Invalid username or password");
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="bg-slate-100">
@@ -53,6 +83,8 @@ export const Login = () => {
                       Username
                     </label>
                     <Input
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                       type="username"
                       id="username"
                       name="username"
@@ -64,6 +96,8 @@ export const Login = () => {
                       Password
                     </label>
                     <Input
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       type="password"
                       id="password"
                       name="password"
@@ -74,6 +108,7 @@ export const Login = () => {
                     <Button
                       type="submit"
                       className="bg-primary hover:bg-secondary text-white"
+                      onClick={handleSubmit}
                     >
                       Login
                     </Button>
