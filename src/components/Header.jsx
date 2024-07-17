@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuthStore } from "../stores/authStore";
+
+import { LayoutDashboard, LogOut, Power, User } from "lucide-react";
 
 export const Header = () => {
   const location = useLocation();
-
+  const { isAuthenticated, user, logout } = useAuthStore((state) => state);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -18,6 +22,18 @@ export const Header = () => {
         return "bg-slate-100";
       default:
         return "bg-white";
+    }
+  };
+
+  const toggleDropdown = () => {
+    setIsProfileOpen(!isProfileOpen);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -78,24 +94,52 @@ export const Header = () => {
             id="menu"
             className={`lg:flex gap-5 ${isMenuOpen ? "" : "hidden"} text-navy `}
           >
-            <ul className="flex lg:items-center flex-col lg:flex-row lg:gap-5">
-              <li className="my-2 lg:my-0">
+            {isAuthenticated ? (
+              <div className="flex lg:items-center flex-col lg:flex-row lg:gap-8">
+                {user?.role === "admin" && (
+                  <Link
+                    to="/admin"
+                    className="flex gap-2 items-center hover:text-secondary transition-all duration-500"
+                  >
+                    <LayoutDashboard size={20} />
+                    Dashboard
+                  </Link>
+                )}
                 <Link
-                  to="/login"
-                  className="flex gap-2 hover:text-secondary transition-all duration-500"
+                  to="/profile"
+                  className="flex gap-2 items-center hover:text-secondary transition-all duration-500"
                 >
-                  Login
+                  <User size={20} />
+                  Profile
                 </Link>
-              </li>
-              <li className="my-2 lg:my-0">
                 <Link
-                  to="/register"
-                  className="hover:text-secondary transition-all duration-500"
+                  onClick={handleLogout}
+                  className="flex gap-2 items-center text-red-600 hover:text-red-500  transition-all duration-500"
                 >
-                  Register
+                  <LogOut size={20} />
+                  Logout
                 </Link>
-              </li>
-            </ul>
+              </div>
+            ) : (
+              <ul className="flex lg:items-center flex-col lg:flex-row lg:gap-5">
+                <li className="my-2 lg:my-0">
+                  <Link
+                    to="/login"
+                    className="flex gap-2 hover:text-secondary transition-all duration-500"
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li className="my-2 lg:my-0">
+                  <Link
+                    to="/register"
+                    className="hover:text-secondary transition-all duration-500"
+                  >
+                    Register
+                  </Link>
+                </li>
+              </ul>
+            )}
           </div>
         </nav>
       </div>
