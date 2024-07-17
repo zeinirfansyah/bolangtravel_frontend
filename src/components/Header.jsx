@@ -90,12 +90,14 @@ export const Header = () => {
               </li>
             </ul>
           </div>
+
           <div
             id="menu"
             className={`lg:flex gap-5 ${isMenuOpen ? "" : "hidden"} text-navy `}
           >
+            <hr className="w-full lg:hidden mb-6" />
             {isAuthenticated ? (
-              <div className="flex lg:items-center flex-col lg:flex-row lg:gap-8">
+              <div className="flex lg:items-center flex-col lg:flex-row gap-4 lg:gap-8">
                 {user?.role === "admin" && (
                   <Link
                     to="/admin"
