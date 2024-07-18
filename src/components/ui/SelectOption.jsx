@@ -23,11 +23,11 @@ SelectOption.propTypes = {
   placeholder: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+      label: PropTypes.any.isRequired,
     })
   ).isRequired,
-  default_value: PropTypes.string.isRequired,
+  default_value: PropTypes.any.isRequired,
   onChange: any.isRequired,
 };
 
