@@ -2,7 +2,11 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuthStore } from "../stores/authStore";
 
-import { LayoutDashboard, LogOut, Power, User } from "lucide-react";
+import {
+  LayoutDashboard,
+  LogOut,
+  User,
+} from "lucide-react";
 
 export const Header = () => {
   const location = useLocation();
@@ -58,37 +62,39 @@ export const Header = () => {
                 </button>
               </div>
             </div>
-            <ul
-              id="menu"
-              className={`lg:flex gap-5 ${
-                isMenuOpen ? "" : "hidden"
-              } text-navy items-center`}
-            >
-              <li className="my-4 lg:my-0">
-                <Link
-                  to="/"
-                  className="hover:text-secondary transition-all duration-500"
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="my-4 lg:my-0">
-                <Link
-                  to="/paket-wisata"
-                  className="active hover:text-secondary transition-all duration-500"
-                >
-                  Travel Package
-                </Link>
-              </li>
-              <li className="my-4 lg:my-0">
-                <Link
-                  to="/tentang-kami"
-                  className="hover:text-secondary transition-all duration-500"
-                >
-                  About Us
-                </Link>
-              </li>
-            </ul>
+            {!location.pathname.includes("/admin") && (
+              <ul
+                id="menu"
+                className={`lg:flex gap-5 ${
+                  isMenuOpen ? "" : "hidden"
+                } text-navy items-center`}
+              >
+                <li className="my-4 lg:my-0">
+                  <Link
+                    to="/"
+                    className="hover:text-secondary transition-all duration-500"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li className="my-4 lg:my-0">
+                  <Link
+                    to="/paket-wisata"
+                    className="active hover:text-secondary transition-all duration-500"
+                  >
+                    Travel Package
+                  </Link>
+                </li>
+                <li className="my-4 lg:my-0">
+                  <Link
+                    to="/tentang-kami"
+                    className="hover:text-secondary transition-all duration-500"
+                  >
+                    About Us
+                  </Link>
+                </li>
+              </ul>
+            )}
           </div>
 
           <div
@@ -98,15 +104,16 @@ export const Header = () => {
             <hr className="w-full lg:hidden mb-6" />
             {isAuthenticated ? (
               <div className="flex lg:items-center flex-col lg:flex-row gap-4 lg:gap-8">
-                {user?.role === "admin" && (
-                  <Link
-                    to="/admin"
-                    className="flex gap-2 items-center hover:text-secondary transition-all duration-500"
-                  >
-                    <LayoutDashboard size={20} />
-                    Dashboard
-                  </Link>
-                )}
+                {user?.role === "admin" &&
+                  !location.pathname.includes("/admin") && (
+                    <Link
+                      to="/admin"
+                      className="flex gap-2 items-center hover:text-secondary transition-all duration-500"
+                    >
+                      <LayoutDashboard size={20} />
+                      Dashboard
+                    </Link>
+                  )}
                 <Link
                   to="/profile"
                   className="flex gap-2 items-center hover:text-secondary transition-all duration-500"
