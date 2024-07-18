@@ -6,6 +6,7 @@ import { Register } from "./pages/auth/Register";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import { Dashboard } from "./pages/admin/Dashboard";
 import { Home } from "./pages/Home";
+import { CreateDestination } from "./pages/admin/CreateDestination";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
             <Route path="/admin" element={<ProtectedRoute role="admin" />}>
               <Route index element={<Dashboard />} />
+              <Route path="add-destination" element={<CreateDestination />} />
             </Route>
           </Routes>
         </Suspense>
