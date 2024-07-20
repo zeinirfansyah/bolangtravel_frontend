@@ -39,7 +39,7 @@ export const Layout = ({ children }) => {
             </div>
             <div className="w-full">
               <Header />
-              <section id="content" className="min-h-screen text-dark">
+              <section id="content" className="min-h-[90vh] text-dark">
                 {children}
               </section>
               <Footer />
