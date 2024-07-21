@@ -7,7 +7,7 @@ import SelectOption from "../../components/ui/SelectOption";
 
 import dayjs from "dayjs";
 
-export const Dashboard = () => {
+export const Booking = () => {
   const { token } = useAuthStore((state) => state);
 
   const [bookingList, setBookingList] = useState([]);
