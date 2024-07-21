@@ -4,9 +4,9 @@ import { Login } from "./pages/auth/Login";
 import { Route, Routes } from "react-router-dom";
 import { Register } from "./pages/auth/Register";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
-import { Dashboard } from "./pages/admin/Dashboard";
 import { Home } from "./pages/Home";
 import { CreateDestination } from "./pages/admin/CreateDestination";
+import { Booking } from "./pages/admin/Booking";
 
 function App() {
   return (
@@ -19,7 +19,8 @@ function App() {
             <Route path="/register" element={<Register />} />
 
             <Route path="/admin" element={<ProtectedRoute role="admin" />}>
-              <Route index element={<Dashboard />} />
+              <Route index element={<Booking />} />
+              <Route path="booking" element={<Booking />} />
               <Route path="add-destination" element={<CreateDestination />} />
             </Route>
           </Routes>
