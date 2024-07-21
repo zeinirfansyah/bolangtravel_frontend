@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CircleUserRound } from "lucide-react";
 import { useAuthStore } from "../stores/authStore";
 
@@ -28,8 +28,12 @@ export const Layout = ({ children }) => {
                 </div>
               </div>
               <ul >
-                <li className="px-6 py-3">Home</li>
-                <li className="px-6 py-3">Destinations</li>
+                <li className="px-6 py-3">
+                  <Link to="/admin">Dashboard</Link>
+                </li>
+                <li className="px-6 py-3">
+                  <Link to="/admin/booking">Bookings</Link>
+                </li>
                 <li className="px-6 py-3">Flights</li>
                 <li className="px-6 py-3">Hotels</li>
                 <li className="px-6 py-3">Bookings</li>
