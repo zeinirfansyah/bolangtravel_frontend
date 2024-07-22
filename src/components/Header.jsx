@@ -42,7 +42,7 @@ export const Header = () => {
   };
 
   return (
-    <header className={`sticky top-0 z-10 shadow  ${backgroundColor()}`}>
+    <header className={`sticky top-0 z-30 shadow  ${backgroundColor()}`}>
       <div className="max-w-7xl mx-auto">
         <nav className="Navbar lg:flex justify-between gap-20 items-center py-6 mx-4">
           <div className="flex flex-col lg:flex-row lg:gap-12">
