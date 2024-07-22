@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { ListStart } from "lucide-react";
 import img_family from "../assets/images/family.webp";
-import img_glassesroom from "../assets/images/glassesroom.webp";
+import img_beach from "../assets/images/beach.jpg";
+import img_beach2 from "../assets/images/beach2.jpg";
+import img_beach3 from "../assets/images/beach3.jpg";
 import { Button } from "../components/ui/Button";
 import FeaturedProductCard from "../components/FeaturedProductCard";
 import ProductCard from "../components/ProductCard";
@@ -42,34 +44,43 @@ export const Home = () => {
   const navigate = useNavigate();
   return (
     <>
-      <div
-        id="home"
-        className="overflow-hidden min-h-screen bg-cover bg-center bg-no-repeat text-center"
-        style={{ backgroundImage: `url(${img_glassesroom})` }}
-      >
-        <div className="overflow-hidden h-screen bg-[#000] bg-opacity-70 ">
-          <div className="max-w-7xl mx-auto px-4 h-screen p-4 flex items-center justify-center">
-            <div className="flex flex-col gap-4 max-w-3xl">
-              <h1 className="text-2xl lg:text-4xl mt-10 font-bold text-center text-white">
-                Discover the Wonders of Indonesia, Explore the Most Beautiful
-                Homeland!
+      <div className="max-w-7xl mx-auto px-4 relative -lg:top-12">
+        <div className="min-h-[80vh] flex flex-col lg:flex-row justify-center items-center gap-8">
+          <div className="flex flex-col gap-6 justify-center items-center lg:items-start w-full lg:w-1/2">
+            <div className="flex flex-col gap-2">
+              <h1 className="text-3xl text-center font-semibold lg:font-normal lg:text-start">
+                Discover the Wonders of Indonesia.
               </h1>
-              <h4 className="text-xl font-light text-white">
-                Unleash Your Inner Explorer: Dive into Indonesia&apos;s Untamed
-                Beauty, from Rainforest Canopy Walks to Volcano Summit Treks
-              </h4>
-              <Button
-                onClick={() => {
-                  navigate("paket-wisata");
-                }}
-                title="Book Now"
-                style="bg-secondary hover:bg-primary text-white max-w-[240px] mx-auto"
+              <h1 className="hidden lg:block lg:text-5xl font-semibold text-center lg:text-start">
+                Explore the Most Beautiful Homeland!
+              </h1>
+            </div>
+            <p className="text-gray-600 text-center lg:text-start lg:text-xl ">
+              Unleash Your Inner Explorer: Dive into Indonesia's Untamed Beauty,
+              from Rainforest Canopy Walks to Volcano Summit Treks
+            </p>
+            <Button className="w-[200px] py-3 bg-primary text-white">Get Started</Button>
+          </div>
+          <div className="w-full lg:w-1/2 justify-center items-center flex flex-col gap-4 order-first lg:order-last">
+            <div className="w-full grid grid-cols-3 justify-center  items-center  gap-5">
+              <img
+                src={img_beach}
+                alt="img_glassesroom"
+                className="w-[420px] h-[300px] lg:w-[520px] lg:h-[400px] object-cover outline-dashed outline-2 outline-primary rounded-es-[120px] rounded-se-[120px] outline-offset-4"
+              />
+              <img
+                src={img_beach2}
+                alt="img_glassesroom"
+                className="w-[420px] h-[300px] lg:w-[520px] lg:h-[480px] object-cover outline-dashed outline-2 outline-primary rounded-[120px] outline-offset-4"
+              />
+              <img
+                src={img_beach3}
+                alt="img_glassesroom"
+                className="w-[420px] h-[300px] lg:w-[520px] lg:h-[400px] object-cover outline-dashed outline-2 outline-primary rounded-ss-[120px] rounded-ee-[120px] outline-offset-4"
               />
             </div>
           </div>
         </div>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 py-14">
         <div className="flex flex-col gap-14">
           <div className="flex flex-col gap-4">
             <h1 className="text-2xl font-semibold">Recommended</h1>
