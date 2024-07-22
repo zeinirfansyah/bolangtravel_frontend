@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ListStart } from "lucide-react";
+import { Star } from "lucide-react";
 import img_family from "../assets/images/family.webp";
 import img_beach from "../assets/images/beach.jpg";
 import img_beach2 from "../assets/images/beach2.jpg";
@@ -66,17 +66,17 @@ export const Home = () => {
               <img
                 src={img_beach}
                 alt="img_glassesroom"
-                className="w-[420px] h-[300px] lg:w-[520px] lg:h-[400px] object-cover outline-dashed outline-2 outline-primary rounded-es-[120px] rounded-se-[120px] outline-offset-4"
+                className="w-[420px] h-[300px] lg:w-[520px] lg:h-[400px] object-cover outline-dashed outline-2 outline-gray-400 rounded-es-[120px] rounded-se-[120px] outline-offset-4"
               />
               <img
                 src={img_beach2}
                 alt="img_glassesroom"
-                className="w-[420px] h-[300px] lg:w-[520px] lg:h-[480px] object-cover outline-dashed outline-2 outline-primary rounded-[120px] outline-offset-4"
+                className="w-[420px] h-[300px] lg:w-[520px] lg:h-[480px] object-cover outline-dashed outline-2 outline-gray-400 rounded-[120px] outline-offset-4"
               />
               <img
                 src={img_beach3}
                 alt="img_glassesroom"
-                className="w-[420px] h-[300px] lg:w-[520px] lg:h-[400px] object-cover outline-dashed outline-2 outline-primary rounded-ss-[120px] rounded-ee-[120px] outline-offset-4"
+                className="w-[420px] h-[300px] lg:w-[520px] lg:h-[400px] object-cover outline-dashed outline-2 outline-gray-400 rounded-ss-[120px] rounded-ee-[120px] outline-offset-4"
               />
             </div>
           </div>
@@ -106,7 +106,7 @@ export const Home = () => {
               <img
                 src={img_family}
                 alt="image14"
-                className="outline-dashed outline-2 outline-darkGray outline-offset-8 lg:rounded-br-[150px] rounded-lg max-h-[480px]"
+                className="outline-dashed outline-2 outline-gray-400 outline-offset-8 lg:rounded-br-[150px] rounded-lg max-h-[480px]"
               />
             </div>
             <div className="flex flex-col gap-7 lg:w-1/2">
@@ -115,23 +115,21 @@ export const Home = () => {
               </div>
               <div className="flex flex-col gap-1">
                 <div className="flex gap-1">
-                  <ListStart />
+                  <Star fill="#FFC107" className="text-yellow-400" />
+                  <Star fill="#FFC107" className="text-yellow-400" />
+                  <Star fill="#FFC107" className="text-yellow-400" />
+                  <Star fill="#FFC107" className="text-yellow-400" />
+                  <Star fill="#FFC107" className="text-yellow-400" />
                 </div>
                 <h1 className="text-4xl">
-                  What a great trip with my family and I should try again next
-                  time soon ...
+                  "What a great trip with my family and I should try again next
+                  time soon."
                 </h1>
-                <h1 className="text-2xl text-darkGray">
+                <h1 className="text-2xl text-gray-400">
                   Rick Atsley, Musician
                 </h1>
               </div>
-              <Button
-                onClick={() => {
-                  navigate("tentang-kami");
-                }}
-                title="About Us"
-                style="bg-secondary hover:bg-primary text-white max-w-[240px]"
-              />
+              <Button onClick={() => navigate("/about")} className="w-[200px] py-3 bg-primary text-white">About Us</Button>
             </div>
           </div>
         </div>
