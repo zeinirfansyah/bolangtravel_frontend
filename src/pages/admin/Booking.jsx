@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { axiosInstance } from "../../hooks/useApi";
+import { DOMAIN_URL, axiosInstance } from "../../hooks/useApi";
 import { useAuthStore } from "../../stores/authStore";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import SelectOption from "../../components/ui/SelectOption";
 
 import dayjs from "dayjs";
+import { Delete, DeleteIcon, Edit, Eye, Trash } from "lucide-react";
 
 export const Booking = () => {
   const { token } = useAuthStore((state) => state);
@@ -15,6 +16,8 @@ export const Booking = () => {
   const [limit, setLimit] = useState(5);
   const [search, setSearch] = useState("");
   const [filterByStatus, setFilterByStatus] = useState("");
+  const [set, setSet] = useState(false);
+  const [error, setError] = useState("");
 
   const getAllBookings = async () => {
     try {
@@ -42,9 +45,73 @@ export const Booking = () => {
 
   useEffect(() => {
     getAllBookings();
-  }, [limit, page, search, filterByStatus]);
+  }, [limit, page, search, filterByStatus, set]);
 
-  console.log(limit);
+  const handleApprove = async (bookingId) => {
+    try {
+      const response = await axiosInstance.patch(
+        `/booking/${bookingId}`,
+        {
+          status: "paid",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        setSet(!set);
+        confirm("Status updated successfully");
+      }
+    } catch (error) {
+      setError(error.response.data.message);
+      console.log(error);
+    }
+  };
+
+  const handleDecline = async (bookingId) => {
+    try {
+      const response = await axiosInstance.patch(
+        `/booking/${bookingId}`,
+        {
+          status: "failed",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        setSet(!set);
+        confirm("Status updated successfully");
+      }
+    } catch (error) {
+      setError(error.response.data.message);
+      console.log(error);
+    }
+  };
+
+  const handleDelete = async (bookingId) => {
+    try {
+      const response = await axiosInstance.delete(`/booking/${bookingId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 200 || response.status === 201) {
+        setSet(!set);
+        confirm("Booking deleted successfully");
+      }
+    } catch (error) {
+      setError(error.response.data.message);
+      console.log(error);
+    }
+  };
 
   const status = ["unpaid", "pending", "paid", "failed"];
 
@@ -119,22 +186,66 @@ export const Booking = () => {
                               }`}
                             </td>
                             {booking?.transfer_receipt ? (
-                              <td className="p-4 min-w-[200px]">
-                                {booking?.transfer_receipt}
+                              <td className="p-4 flex justify-center">
+                                <img
+                                  src={`${DOMAIN_URL}/${booking?.transfer_receipt}`}
+                                  alt="transfer_receipt"
+                                  className="w-20 h-20 object-cover"
+                                />
                               </td>
                             ) : (
                               <td className="p-4 text-gray-400 min-w-[200px]">
                                 No receipt yet
                               </td>
                             )}
-                            <td className="p-4 min-w-[200px]">
-                              {booking?.status}
+                            <td className="p-4">
+                              {booking?.status === "pending" ? (
+                                <div className="flex justify-center items-center gap-2 p-4 min-w-[100px]">
+                                  <Button
+                                    onClick={() => handleApprove(booking?.id)}
+                                    className="bg-gray-100"
+                                  >
+                                    Accept
+                                  </Button>
+                                  <Button
+                                    onClick={() => handleDecline(booking?.id)}
+                                    className="border-red-500"
+                                  >
+                                    Decline
+                                  </Button>
+                                </div>
+                              ) : booking?.status === "paid" ? (
+                                <div className="flex items-center justify-center gap-2 capitalize">
+                                  <p className="text-green-500 text-center">
+                                    {booking?.status}
+                                  </p>
+                                </div>
+                              ) : booking?.status === "unpaid" ? (
+                                <div className="flex items-center justify-center gap-2 capitalize">
+                                  <p className="text-gray-600 text-center">
+                                    {booking?.status}
+                                  </p>
+                                </div>
+                              ) : (
+                                <div className="flex items-center justify-center gap-2 capitalize">
+                                  <p className="text-red-500 text-center">
+                                    {booking?.status}
+                                  </p>
+                                </div>
+                              )}
                             </td>
-                            <td className="flex gap-2 p-4 min-w-[200px]">
-                              <Button className="">Edit</Button>
-                              <Button className="bg-red-500 text-white">
-                                Delete
-                              </Button>
+                            <td className="p-4">
+                              <div className="flex justify-center items-center gap-2 p-4">
+                                <Button className="w-auto bg-gray-300 cursor-not-allowed">
+                                  <Edit size={20} className="text-white" />
+                                </Button>
+                                <Button
+                                  onClick={() => handleDelete(booking?.id)}
+                                  className="w-auto"
+                                >
+                                  <Trash size={20} className="text-red-500" />
+                                </Button>
+                              </div>
                             </td>
                           </tr>
                         ))}
