@@ -208,13 +208,13 @@ export const Booking = () => {
                                 <div className="flex justify-center items-center gap-2 p-4 min-w-[100px]">
                                   <Button
                                     onClick={() => handleApprove(booking?.id)}
-                                    className="text-white bg-primary"
+                                    className="text-white bg-primary mx-auto"
                                   >
                                     Accept
                                   </Button>
                                   <Button
                                     onClick={() => handleDecline(booking?.id)}
-                                    className="text-white bg-red-500"
+                                    className="text-white bg-red-500 mx-auto"
                                   >
                                     Decline
                                   </Button>
@@ -242,13 +242,13 @@ export const Booking = () => {
                             <td className="p-4 text-center">
                               <div className="flex justify-center items-center gap-2 p-4">
                                 <Button className="w-auto bg-gray-300 cursor-not-allowed">
-                                  <Edit size={20} className="text-white" />
+                                  <Edit size={20} className="text-white mx-auto" />
                                 </Button>
                                 <Button
                                   onClick={() => handleDelete(booking?.id)}
                                   className="w-auto"
                                 >
-                                  <Trash size={20} className="text-red-500" />
+                                  <Trash size={20} className="text-red-500 mx-auto" />
                                 </Button>
                               </div>
                             </td>
