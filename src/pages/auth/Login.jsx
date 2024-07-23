@@ -52,9 +52,6 @@ export const Login = () => {
               }}
               className="flex flex-col lg:flex-row justify-center items-center border-2 w-full rounded-3xl bg-white my-12"
             >
-              <div id="error">
-                {error && <Toast text={error} backgroundColor="bg-red-200" />}
-              </div>
               <div className="w-full lg:w-1/2 h-full">
                 <motion.img
                   initial={{ opacity: 0, scale: 0.5 }}
@@ -77,6 +74,11 @@ export const Login = () => {
               </div>
               <div className="w-full lg:w-1/2 h-full px-8 lg:px-12 py-12 lg:py-0">
                 <form action="" method="post" className="space-y-4">
+                  <div id="error">
+                    {error && (
+                      <Toast text={error} backgroundColor="bg-red-200" />
+                    )}
+                  </div>
                   <div className="mb-8 lg:my-7 space-y-1">
                     <h1 className="text-2xl font-semibold">Welcome Back!</h1>
                     <p className="text-sm text-slate-400">
