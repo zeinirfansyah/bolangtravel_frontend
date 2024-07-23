@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { DOMAIN_URL, axiosInstance } from "../../hooks/useApi";
-import { useAuthStore } from "../../stores/authStore";
-import { Button } from "../../components/ui/Button";
-import { Input } from "../../components/ui/Input";
-import SelectOption from "../../components/ui/SelectOption";
-
 import dayjs from "dayjs";
-import { Delete, DeleteIcon, Edit, Eye, Trash } from "lucide-react";
+import { DOMAIN_URL, axiosInstance } from "../../../hooks/useApi";
+import Toast from "../../../components/ui/Toast";
+import { Input } from "../../../components/ui/Input";
+import { Button } from "../../../components/ui/Button";
+import SelectOption from "../../../components/ui/SelectOption";
+import { Edit, Trash } from "lucide-react";
+import { useAuthStore } from "../../../stores/authStore";
 
 export const Booking = () => {
   const { token } = useAuthStore((state) => state);
 
   const [bookingList, setBookingList] = useState([]);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(8);
   const [search, setSearch] = useState("");
   const [filterByStatus, setFilterByStatus] = useState("");
   const [set, setSet] = useState(false);
@@ -63,7 +63,7 @@ export const Booking = () => {
 
       if (response.status === 200 || response.status === 201) {
         setSet(!set);
-        confirm("Status updated successfully");
+        alert("Status updated successfully");
       }
     } catch (error) {
       setError(error.response.data.message);
@@ -87,7 +87,7 @@ export const Booking = () => {
 
       if (response.status === 200 || response.status === 201) {
         setSet(!set);
-        confirm("Status updated successfully");
+        alert("Status updated successfully");
       }
     } catch (error) {
       setError(error.response.data.message);
@@ -105,7 +105,7 @@ export const Booking = () => {
 
       if (response.status === 200 || response.status === 201) {
         setSet(!set);
-        confirm("Booking deleted successfully");
+        alert("Booking deleted successfully");
       }
     } catch (error) {
       setError(error.response.data.message);
@@ -135,6 +135,11 @@ export const Booking = () => {
             <div className="min-h-[90vh] flex flex-col space-y-6">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col items-center justify-center max-h-[85vh]">
+                  <div id="error">
+                    {error && (
+                      <Toast text={error} backgroundColor="bg-red-200" />
+                    )}
+                  </div>
                   <div className="flex w-full my-3 gap-4">
                     <div className="w-full">
                       <Input
@@ -157,36 +162,36 @@ export const Booking = () => {
                     </div>
                   </div>
                   <div className="w-full overflow-x-auto">
-                    <table className="table-auto bg-white rounded-xl text-center text-sm w-full overflow-x-scroll">
+                    <table className="table-auto bg-white rounded-xl text-sm w-full overflow-x-scroll">
                       <thead className="border-b">
                         <tr>
-                          <th className="p-4">Date</th>
-                          <th className="p-4">User</th>
-                          <th className="p-4">Package</th>
-                          <th className="p-4">Total</th>
-                          <th className="p-4">Transfer Receipt</th>
-                          <th className="p-4">Status</th>
-                          <th className="p-4">Action</th>
+                          <th className="p-4 text-start">Date</th>
+                          <th className="p-4 text-start">User</th>
+                          <th className="p-4 text-start">Package</th>
+                          <th className="p-4 text-start">Total</th>
+                          <th className="p-4 text-center">Transfer Receipt</th>
+                          <th className="p-4 text-center">Status</th>
+                          <th className="p-4 text-center">Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         {bookingList?.map((booking) => (
                           <tr key={booking?.id}>
-                            <td className="p-4">
+                            <td className="p-4 text-start">
                               {dayjs(booking?.date).format("DD MMM YYYY")}
                             </td>
-                            <td className="p-4">{booking?.users?.username}</td>
-                            <td className="p-4">
+                            <td className="p-4 text-start">{booking?.users?.username}</td>
+                            <td className="p-4 text-start">
                               {booking?.travel_packages?.title}
                             </td>
-                            <td className="p-4">
+                            <td className="p-4 text-start">
                               {`IDR.${
                                 booking?.travel_packages?.price +
                                 booking?.travel_packages?.price * 0.11
                               }`}
                             </td>
                             {booking?.transfer_receipt ? (
-                              <td className="p-4 flex justify-center">
+                              <td className="p-4 text-center flex justify-center">
                                 <img
                                   src={`${DOMAIN_URL}/${booking?.transfer_receipt}`}
                                   alt="transfer_receipt"
@@ -194,22 +199,22 @@ export const Booking = () => {
                                 />
                               </td>
                             ) : (
-                              <td className="p-4 text-gray-400 min-w-[200px]">
+                              <td className="p-4 text-center text-gray-400 min-w-[200px]">
                                 No receipt yet
                               </td>
                             )}
-                            <td className="p-4">
+                            <td className="p-4 text-center">
                               {booking?.status === "pending" ? (
                                 <div className="flex justify-center items-center gap-2 p-4 min-w-[100px]">
                                   <Button
                                     onClick={() => handleApprove(booking?.id)}
-                                    className="bg-gray-100"
+                                    className="text-white bg-primary"
                                   >
                                     Accept
                                   </Button>
                                   <Button
                                     onClick={() => handleDecline(booking?.id)}
-                                    className="border-red-500"
+                                    className="text-white bg-red-500"
                                   >
                                     Decline
                                   </Button>
@@ -234,7 +239,7 @@ export const Booking = () => {
                                 </div>
                               )}
                             </td>
-                            <td className="p-4">
+                            <td className="p-4 text-center">
                               <div className="flex justify-center items-center gap-2 p-4">
                                 <Button className="w-auto bg-gray-300 cursor-not-allowed">
                                   <Edit size={20} className="text-white" />
@@ -258,9 +263,9 @@ export const Booking = () => {
                       <div className="max-w-[120px]">
                         <SelectOption
                           options={limitData}
-                          default_value={5}
+                          default_value={8}
                           onChange={(e) => setLimit(e.target.value)}
-                          firstOption="5"
+                          firstOption="8"
                           className={"border-2 rounded-lg py-2"}
                         />
                       </div>
