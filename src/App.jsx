@@ -5,8 +5,6 @@ import { Route, Routes } from "react-router-dom";
 import { Register } from "./pages/auth/Register";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import { Home } from "./pages/Home";
-import { CreateDestination } from "./pages/admin/CreateDestination";
-import { Booking } from "./pages/admin/Booking";
 import { About } from "./pages/About";
 import { PackageCatalog } from "./pages/PackageCatalog";
 import { Profile } from "./pages/Profile";
@@ -16,6 +14,10 @@ import { Payment } from "./pages/Payment";
 import { CompletedBooking } from "./pages/CompletedBooking";
 import { BookingInfo } from "./pages/BookingInfo";
 import { NotFound } from "./pages/NotFound";
+import { Booking } from "./pages/admin/Booking/Booking";
+import { CreateDestination } from "./pages/admin/Destination/CreateDestination";
+import { DestinationList } from "./pages/admin/Destination/DestinationList";
+import { DestinationDetail } from "./pages/admin/Destination/DestinationDetail";
 
 function App() {
   return (
@@ -47,6 +49,8 @@ function App() {
             <Route path="/admin" element={<ProtectedRoute role="admin" />}>
               <Route index element={<Booking />} />
               <Route path="booking" element={<Booking />} />
+              <Route path="destination" element={<DestinationList />} />
+              <Route path="destination/:id" element={<DestinationDetail />} />
               <Route path="add-destination" element={<CreateDestination />} />
             </Route>
 
