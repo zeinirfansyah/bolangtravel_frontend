@@ -59,7 +59,14 @@ export const Home = () => {
               Unleash Your Inner Explorer: Dive into Indonesia's Untamed Beauty,
               from Rainforest Canopy Walks to Volcano Summit Treks
             </p>
-            <Button onClick={() => navigate("/travel-package")} className="max-w-[200px] py-3 bg-primary text-white">Get Started</Button>
+            <div className="w-[200px]">
+              <Button
+                onClick={() => navigate("/travel-package")}
+                className="py-3 bg-primary text-white"
+              >
+                Get Started
+              </Button>
+            </div>
           </div>
           <div className="w-full lg:w-1/2 justify-center items-center flex flex-col gap-4 order-first lg:order-last">
             <div className="w-full grid grid-cols-3 justify-center  items-center  gap-5">
@@ -129,7 +136,14 @@ export const Home = () => {
                   Rick Atsley, Musician
                 </h1>
               </div>
-              <Button onClick={() => navigate("/about")} className="w-[200px] py-3 bg-primary text-white">About Us</Button>
+              <div className="w-[200px]">
+                <Button
+                  onClick={() => navigate("/about")}
+                  className="py-3 bg-primary text-white"
+                >
+                  About Us
+                </Button>
+              </div>
             </div>
           </div>
         </div>
