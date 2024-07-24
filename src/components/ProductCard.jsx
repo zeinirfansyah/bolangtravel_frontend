@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
     <>
       <Link
         key={product.id}
-        to={`/paket-wisata/${product.id}`}
+        to={`/travel-package/${product.id}`}
         className="min-h-[240px] my-3"
       >
         <picture className="relative hover:brightness-75 transition-all duration-300">

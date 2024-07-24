@@ -42,7 +42,7 @@ export const Header = () => {
   };
 
   return (
-    <header className={`sticky top-0 z-10 shadow  ${backgroundColor()}`}>
+    <header className={`sticky top-0 z-30 shadow  ${backgroundColor()}`}>
       <div className="max-w-7xl mx-auto">
         <nav className="Navbar lg:flex justify-between gap-20 items-center py-6 mx-4">
           <div className="flex flex-col lg:flex-row lg:gap-12">
@@ -79,7 +79,7 @@ export const Header = () => {
                 </li>
                 <li className="my-4 lg:my-0">
                   <Link
-                    to="/paket-wisata"
+                    to="/travel-package"
                     className="active hover:text-secondary transition-all duration-500"
                   >
                     Travel Package
@@ -87,7 +87,7 @@ export const Header = () => {
                 </li>
                 <li className="my-4 lg:my-0">
                   <Link
-                    to="/tentang-kami"
+                    to="/about"
                     className="hover:text-secondary transition-all duration-500"
                   >
                     About Us
@@ -115,7 +115,7 @@ export const Header = () => {
                     </Link>
                   )}
                 <Link
-                  to="/profile"
+                  to="/account"
                   className="flex gap-2 items-center hover:text-secondary transition-all duration-500"
                 >
                   <User size={20} />

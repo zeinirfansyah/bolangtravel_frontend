@@ -34,11 +34,10 @@ export const Layout = ({ children }) => {
                 <li className="px-6 py-3">
                   <Link to="/admin/booking">Bookings</Link>
                 </li>
-                <li className="px-6 py-3">Flights</li>
-                <li className="px-6 py-3">Hotels</li>
-                <li className="px-6 py-3">Bookings</li>
-                <li className="px-6 py-3">Profile</li>
-                <li className="px-6 py-3">Logout</li>
+                <li className="px-6 py-3">
+                  <Link to="/admin/destination">Destinations</Link>
+                </li>
+                <li className="px-6 py-3">Travel Packages</li>
               </ul>
             </div>
             <div className="w-full">

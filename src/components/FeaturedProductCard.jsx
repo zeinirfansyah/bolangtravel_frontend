@@ -8,7 +8,7 @@ const FeaturedProductCard = ({ product }) => {
     <>
       <Link
         key={product?.id}
-        to={`/paket-wisata/${product?.id}`}
+        to={`/travel-package/${product?.id}`}
         className="min-h-[240px]"
       >
         <div
