@@ -44,6 +44,13 @@ export const PackageCatalog = () => {
     };
   });
 
+  const limitNumber = [10, 20, 30, 40, 50];
+
+  const limitData = limitNumber.map((number) => ({
+    value: number,
+    label: number,
+  }));
+
   return (
     <>
       <div className="max-w-7xl mx-auto px-4">
@@ -85,22 +92,37 @@ export const PackageCatalog = () => {
           </div>
         </div>
         <hr className="my-6" />
-        <div className="flex items-center space-x-4 my-8">
-          <button
-            onClick={() => setPage(page - 1)}
-            disabled={page === 1}
-            className={`px-4 py-2 border rounded-md text-white bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
-          >
-            Previous
-          </button>
-          <span className="text-lg font-semibold">{page}</span>
-          <button
-            onClick={() => setPage(page + 1)}
-            disabled={productList.length < limit}
-            className={`px-4 py-2 border rounded-md text-white bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
-          >
-            Next
-          </button>
+        <div className="flex justify-between items-center">
+          <div className="flex flex-grow gap-4 items-center">
+            <p>Show</p>
+            <div className="max-w-[120px]">
+              <SelectOption
+                options={limitData}
+                default_value={8}
+                onChange={(e) => setLimit(e.target.value)}
+                firstOption="8"
+                className={"border-2 rounded-lg py-2"}
+              />
+            </div>
+            <p>Entries</p>
+          </div>
+          <div className="flex items-center space-x-4 my-8">
+            <button
+              onClick={() => setPage(page - 1)}
+              disabled={page === 1}
+              className={`px-4 py-2 border rounded-md text-white bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
+            >
+              Previous
+            </button>
+            <span className="text-lg font-semibold">{page}</span>
+            <button
+              onClick={() => setPage(page + 1)}
+              disabled={productList.length < limit}
+              className={`px-4 py-2 border rounded-md text-white bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </>
