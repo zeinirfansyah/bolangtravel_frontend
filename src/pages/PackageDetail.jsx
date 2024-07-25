@@ -4,12 +4,10 @@ import { DOMAIN_URL, axiosInstance } from "../hooks/useApi";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
 import DestinationCard from "../components/DestinationCard";
-import { useAuthStore } from "../stores/authStore";
 import Toast from "../components/ui/Toast";
 
 export const PackageDetail = () => {
   const { id } = useParams();
-  const { token } = useAuthStore((state) => state);
   const [product, setProduct] = useState(null);
   const [selectedDate, setSelectedDate] = useState("");
   const [error, setError] = useState("");
@@ -29,37 +27,13 @@ export const PackageDetail = () => {
 
   useEffect(() => {
     getProduct();
-  }, []);
-
-  const postBooking = async () => {
-    try {
-      const response = await axiosInstance.post(
-        `/booking`,
-        {
-          travel_package_id: product?.id,
-          date: selectedDate,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            travel_package_id: product?.id,
-          },
-        }
-      );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  }, [id]);
 
   const handleBooking = () => {
     if (!selectedDate) {
       setError("Please select a date");
       return;
     }
-    postBooking();
     navigate(`/booking/${product?.id}/${selectedDate}`);
   };
 

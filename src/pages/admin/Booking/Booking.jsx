@@ -161,7 +161,7 @@ export const Booking = () => {
                       />
                     </div>
                   </div>
-                  <div className="w-full overflow-x-auto">
+                  <div className="w-full overflow-x-auto rounded-xl ">
                     <table className="table-auto bg-white rounded-xl text-sm w-full overflow-x-scroll">
                       <thead className="border-b">
                         <tr>
