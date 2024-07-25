@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import {
   Book,
   BookDashed,
+  BookDownIcon,
   CircleUserRound,
   LucideLayoutDashboard,
   TreePalm,
@@ -68,8 +69,8 @@ export const Layout = ({ children }) => {
                       <Link to="/admin/destination">Travel Packages</Link>
                     </li>
                     <li className="px-2 py-3 flex gap-2 items-center">
-                      <TreePalm size={18} />
-                      <Link to="/admin/destination">Destinations</Link>
+                      <BookDownIcon size={18} />
+                      <Link to="/admin/destination">Package Categories</Link>
                     </li>
                   </ul>
                 </div>
