@@ -56,11 +56,14 @@ export const DestinationList = () => {
 
   const handleDelete = async (destinationId) => {
     try {
-      const response = await axiosInstance.delete(`/destination/${destinationId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axiosInstance.delete(
+        `/destination/${destinationId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.status === 200 || response.status === 201) {
         setSet(!set);
@@ -85,8 +88,16 @@ export const DestinationList = () => {
                       <Toast text={error} backgroundColor="bg-red-200" />
                     )}
                   </div>
-                  <div className="flex w-full my-3 gap-4">
-                    <div className="w-full">
+                  <div className="flex items-center justify-between w-full my-3 gap-4">
+                    <div className="w-fit">
+                      <Button
+                        className="bg-primary text-white"
+                        onClick={() => navigate("/admin/destination/add-destination")}
+                      >
+                        Add Destination
+                      </Button>
+                    </div>
+                    <div className="w-[40%]">
                       <Input
                         placeholder="Search destination"
                         onChange={(e) => {
@@ -190,7 +201,7 @@ export const DestinationList = () => {
                       <button
                         onClick={() => setPage(page - 1)}
                         disabled={page === 1}
-                        className={`px-4 py-2 border rounded-md text-white bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
+                        className={`px-4 py-2 border rounded-md text-white bg-primary hover:bg-secondary disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
                       >
                         Previous
                       </button>
@@ -198,7 +209,7 @@ export const DestinationList = () => {
                       <button
                         onClick={() => setPage(page + 1)}
                         disabled={destinationList.length < limit}
-                        className={`px-4 py-2 border rounded-md text-white bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
+                        className={`px-4 py-2 border rounded-md text-white bg-primary hover:bg-secondary disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
                       >
                         Next
                       </button>
