@@ -4,13 +4,63 @@ import icon_emptyImage from "../../../assets/icons/empty_image.jpeg";
 import { Input } from "../../../components/ui/Input";
 import { Link, useNavigate } from "react-router-dom";
 import SelectOption from "../../../components/ui/SelectOption";
+import { axiosInstance } from "../../../hooks/useApi";
+import { useAuthStore } from "../../../stores/authStore";
 
 export const CreateDestination = () => {
-  const [thumbnailFrame, setThumbnailFrame] = useState(icon_emptyImage);
+  const { token } = useAuthStore((state) => state);
+  const [thumbnailUrl, setThumbnailUrl] = useState("Thumbnail");
+  const [thumbnail, setThumbnail] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [ticketPrice, setTicketPrice] = useState(0);
+  const [location, setLocation] = useState("");
+  const [destinationContact, setDestinationContact] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [isAvailable, setIsAvailable] = useState("true");
+  const [openHour, setOpenHour] = useState("");
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
-  const handleCreate = () => {
-    navigate("/admin/destination");
+  const fileUpload = async (event) => {
+    const file = event.target.files[0];
+    setThumbnailUrl(URL.createObjectURL(file));
+    setThumbnail(file);
+  };
+
+  const handleCreate =  async (event) => {
+    event.preventDefault();
+
+    try {
+      const formData = new FormData();
+
+      formData.append("thumbnail", thumbnail);
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("ticket_price", ticketPrice);
+      formData.append("location", location);
+      formData.append("destination_contact", destinationContact);
+      formData.append("expiry_date", expiryDate);
+      formData.append("is_available", isAvailable);
+      formData.append("open_hour", openHour);
+
+      const response = await axiosInstance.post("/destination", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("response", response.status);
+
+      if (response.status === 201 || response.status === 200) {
+        alert("Destination created successfully");
+        navigate("/admin/destination");
+      }
+    } catch (error) {
+      setError(error?.response?.data?.message);
+      console.log(error);
+    }
   };
 
   const availability = ["true", "false"];
@@ -25,7 +75,10 @@ export const CreateDestination = () => {
       <div className="px-4">
         <div className="flex flex-col gap-5 min-h-[90vh] py-8">
           <div className="flex gap-2 bg-white border-b-2 p-4 mb-4">
-            <Link to="/admin/destination" className="text-gray-400 hover:text-secondary">
+            <Link
+              to="/admin/destination"
+              className="text-gray-400 hover:text-secondary"
+            >
               <p>Destination</p>
             </Link>
             <p>/</p>
@@ -42,16 +95,28 @@ export const CreateDestination = () => {
               <div className="flex flex-col gap-5 min-w-[20rem]">
                 <div className="flex flex-col gap-2 ">
                   <label htmlFor="title">Destination Name</label>
-                  <Input placeholder="Destination Name" id="title" />
+                  <Input
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="Destination Name"
+                    id="title"
+                  />
                 </div>
                 <div className="flex flex-col gap-2 ">
                   <label htmlFor="contact">Contact</label>
-                  <Input placeholder="Contact" id="contact" />
+                  <Input
+                    value={destinationContact}
+                    onChange={(e) => setDestinationContact(e.target.value)}
+                    placeholder="Contact"
+                    id="contact"
+                  />
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <label htmlFor="location">Location</label>
                   <textarea
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
                     name="location"
                     id="location"
                     cols="10"
@@ -65,17 +130,33 @@ export const CreateDestination = () => {
                 <div className="flex flex-col lg:flex-row gap-10">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="ticket_price">Ticket Price</label>
-                    <Input placeholder="Ticket Price" id="ticket_price" />
+                    <Input
+                      value={ticketPrice}
+                      onChange={(e) => setTicketPrice(e.target.value)}
+                      placeholder="Ticket Price"
+                      id="ticket_price"
+                    />
                   </div>
                   <div className="flex flex-col gap-2">
                     <label htmlFor="open-hour">Open Hour</label>
-                    <Input placeholder="Open Hour" id="open-hour" />
+                    <Input
+                      value={openHour}
+                      onChange={(e) => setOpenHour(e.target.value)}
+                      placeholder="Open Hour"
+                      id="open-hour"
+                    />
                   </div>
                 </div>
                 <div className="flex flex-col lg:flex-row gap-10 w-full">
                   <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="expire">Expiry Date</label>
-                    <Input type="date" placeholder="Expiry Date" id="expire" />
+                    <Input
+                      value={expiryDate}
+                      onChange={(e) => setExpiryDate(e.target.value)}
+                      type="date"
+                      placeholder="Expiry Date"
+                      id="expire"
+                    />
                   </div>
                   <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="availability">Availability</label>
@@ -86,8 +167,8 @@ export const CreateDestination = () => {
                       firstOption={"Select Availability"}
                       disabled={true}
                       default_value={"unavailable"}
-                      onChange={() => {
-                        console.log("hai");
+                      onChange={(e) => {
+                        setIsAvailable(e.target.value);
                       }}
                     />
                   </div>
@@ -97,9 +178,17 @@ export const CreateDestination = () => {
                     htmlFor="thumbnail"
                     className="flex items-center justify-center w-full outline-dashed outline-2 outline-primary p-5 rounded-lg text-center cursor-pointer hover:bg-slate-100 h-[130px]"
                   >
-                    Thumbnail
+                    {thumbnailUrl && (
+                      <img src={thumbnailUrl} alt="thumbnail" className="w-full h-full object-cover"/>
+                    )}
                   </label>
-                  <Input type="file" id="thumbnail" className="hidden" />
+                  <Input
+                    onChange={fileUpload}
+                    type="file"
+                    accept=".jpg, .jpeg, .png"
+                    id="thumbnail"
+                    className="hidden"
+                  />
                 </div>
               </div>
             </div>
