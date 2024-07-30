@@ -200,7 +200,7 @@ export const CreateDestination = () => {
                 Continue
               </Button>
               <Button
-                onClick={() => navigate(-1)}
+                onClick={() => navigate("/admin/destination")}
                 className="bg-lightGray text-secondary border-2 border-secondary hover:border-red-400 hover:text-red-300"
               >
                 Cancel
