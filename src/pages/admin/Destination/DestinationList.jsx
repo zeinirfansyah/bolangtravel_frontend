@@ -3,15 +3,14 @@ import dayjs from "dayjs";
 import Toast from "../../../components/ui/Toast";
 import { Input } from "../../../components/ui/Input";
 import SelectOption from "../../../components/ui/SelectOption";
-import { DOMAIN_URL, axiosInstance } from "../../../hooks/useApi";
+import { axiosInstance } from "../../../hooks/useApi";
 import { Button } from "../../../components/ui/Button";
-import { Edit, Eye, Trash } from "lucide-react";
+import { Eye, Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../stores/authStore";
 
 export const DestinationList = () => {
   const [destinationList, setDestinationList] = useState([]);
-  const [destinationLocation, setDestinationLocation] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(8);
   const [search, setSearch] = useState("");
