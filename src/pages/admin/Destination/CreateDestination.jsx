@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import SelectOption from "../../../components/ui/SelectOption";
 import { axiosInstance } from "../../../hooks/useApi";
 import { useAuthStore } from "../../../stores/authStore";
+import Toast from "../../../components/ui/Toast";
 
 export const CreateDestination = () => {
   const { token } = useAuthStore((state) => state);
@@ -84,6 +85,13 @@ export const CreateDestination = () => {
             <p className="text-slate-700 font-bold">Create Destination</p>
           </div>
           <form className="flex flex-col justify-center items-center gap-5 ">
+            {error && (
+              <Toast
+                text={error}
+                backgroundColor="bg-red-200"
+                textColor="text-red-700"
+              />
+            )}
             <div
               className="flex flex-col lg:flex-row gap-10
               justify-center w-full px-12"
@@ -133,25 +141,24 @@ export const CreateDestination = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-5 w-full">
-               
-                  <div className="flex flex-col gap-2 w-full">
-                    <label htmlFor="ticket_price">Ticket Price</label>
-                    <Input
-                      value={ticketPrice}
-                      onChange={(e) => setTicketPrice(e.target.value)}
-                      placeholder="Ticket Price"
-                      id="ticket_price"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2 w-full">
-                    <label htmlFor="open-hour">Open Hour</label>
-                    <Input
-                      value={openHour}
-                      onChange={(e) => setOpenHour(e.target.value)}
-                      placeholder="Open Hour"
-                      id="open-hour"
-                    />
-                  </div>
+                <div className="flex flex-col gap-2 w-full">
+                  <label htmlFor="ticket_price">Ticket Price</label>
+                  <Input
+                    value={ticketPrice}
+                    onChange={(e) => setTicketPrice(e.target.value)}
+                    placeholder="Ticket Price"
+                    id="ticket_price"
+                  />
+                </div>
+                <div className="flex flex-col gap-2 w-full">
+                  <label htmlFor="open-hour">Open Hour</label>
+                  <Input
+                    value={openHour}
+                    onChange={(e) => setOpenHour(e.target.value)}
+                    placeholder="Open Hour"
+                    id="open-hour"
+                  />
+                </div>
                 <div className="flex flex-col lg:flex-row gap-10 w-full">
                   <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="expire">Expiry Date</label>
