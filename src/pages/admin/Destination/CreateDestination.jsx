@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "../../../components/ui/Button";
-import icon_emptyImage from "../../../assets/icons/empty_image.jpeg";
 import { Input } from "../../../components/ui/Input";
 import { Link, useNavigate } from "react-router-dom";
 import SelectOption from "../../../components/ui/SelectOption";
@@ -29,7 +28,7 @@ export const CreateDestination = () => {
     setThumbnail(file);
   };
 
-  const handleCreate =  async (event) => {
+  const handleCreate = async (event) => {
     event.preventDefault();
 
     try {
@@ -73,26 +72,23 @@ export const CreateDestination = () => {
   return (
     <>
       <div className="px-4">
-        <div className="flex flex-col gap-5 min-h-[90vh] py-8">
+        <div className="flex flex-col gap-5 min-h-[90vh] py-4">
           <div className="flex gap-2 bg-white border-b-2 p-4 mb-4">
             <Link
               to="/admin/destination"
-              className="text-gray-400 hover:text-secondary"
+              className="text-gray-700 hover:text-slate-400"
             >
               <p>Destination</p>
             </Link>
             <p>/</p>
-            <p className="text-secondary">Create</p>
+            <p className="text-slate-700 font-bold">Create Destination</p>
           </div>
-          <form
-            action=""
-            className="flex flex-col justify-center items-center gap-5 "
-          >
+          <form className="flex flex-col justify-center items-center gap-5 ">
             <div
               className="flex flex-col lg:flex-row gap-10
-              justify-center"
+              justify-center w-full px-12"
             >
-              <div className="flex flex-col gap-5 min-w-[20rem]">
+              <div className="flex flex-col gap-5 w-full">
                 <div className="flex flex-col gap-2 ">
                   <label htmlFor="title">Destination Name</label>
                   <Input
@@ -114,21 +110,31 @@ export const CreateDestination = () => {
 
                 <div className="flex flex-col gap-2">
                   <label htmlFor="location">Location</label>
-                  <textarea
+                  <Input
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     name="location"
                     id="location"
-                    cols="10"
-                    rows="3"
                     placeholder="Location"
-                    className="border bg-white rounded-lg p-4 w-full focus:outline-secondary transition-all duration-500"
-                  ></textarea>
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="location">Description</label>
+                  <textarea
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    name="description"
+                    id="description"
+                    placeholder="description"
+                    rows={2}
+                    cols={30}
+                    className="border-2 rounded-lg p-4"
+                  />
                 </div>
               </div>
-              <div className="flex flex-col gap-5 min-w-[20rem]">
-                <div className="flex flex-col lg:flex-row gap-10">
-                  <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-5 w-full">
+               
+                  <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="ticket_price">Ticket Price</label>
                     <Input
                       value={ticketPrice}
@@ -137,7 +143,7 @@ export const CreateDestination = () => {
                       id="ticket_price"
                     />
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="open-hour">Open Hour</label>
                     <Input
                       value={openHour}
@@ -146,7 +152,6 @@ export const CreateDestination = () => {
                       id="open-hour"
                     />
                   </div>
-                </div>
                 <div className="flex flex-col lg:flex-row gap-10 w-full">
                   <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="expire">Expiry Date</label>
@@ -176,10 +181,14 @@ export const CreateDestination = () => {
                 <div className="flex flex-col gap-2">
                   <label
                     htmlFor="thumbnail"
-                    className="flex items-center justify-center w-full outline-dashed outline-2 outline-primary p-5 rounded-lg text-center cursor-pointer hover:bg-slate-100 h-[130px]"
+                    className="flex items-center justify-center w-full outline-dashed outline-2 outline-slate-700 p-5 rounded-lg text-center cursor-pointer hover:bg-slate-100 h-[120px]"
                   >
                     {thumbnailUrl && (
-                      <img src={thumbnailUrl} alt="thumbnail" className="w-full h-full object-cover"/>
+                      <img
+                        src={thumbnailUrl}
+                        alt="thumbnail"
+                        className="w-full h-full object-cover"
+                      />
                     )}
                   </label>
                   <Input
@@ -192,18 +201,18 @@ export const CreateDestination = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col justify-center items-center gap-3 w-full lg:w-1/4 my-5">
-              <Button
-                onClick={(e) => handleCreate(e)}
-                className="bg-secondary text-white hover:bg-primary"
-              >
-                Continue
-              </Button>
+            <div className="flex gap-3 w-full lg:w-1/4 my-5">
               <Button
                 onClick={() => navigate("/admin/destination")}
-                className="bg-lightGray text-secondary border-2 border-secondary hover:border-red-400 hover:text-red-300"
+                className="bg-lightGray text-slate-400 border-2 border-slate-400 hover:border-red-400 hover:text-red-300"
               >
                 Cancel
+              </Button>
+              <Button
+                onClick={(e) => handleCreate(e)}
+                className="bg-slate-700 text-white hover:bg-slate-600"
+              >
+                Continue
               </Button>
             </div>
           </form>
