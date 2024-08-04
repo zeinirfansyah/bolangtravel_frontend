@@ -41,7 +41,7 @@ export const DestinationDetail = () => {
           <div className="flex mx-4 justify-end w-fit">
             <Button
               className="bg-slate-700 hover:bg-slate-500 text-white"
-              onClick={() => navigate("/admin/destination/edit-destination")}
+              onClick={() => navigate(`/admin/destination/edit-destination/${id}`)}
             >
               Edit Destination
             </Button>
