@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { DOMAIN_URL, axiosInstance } from "../../../hooks/useApi";
 import dayjs from "dayjs";
+import { Button } from "../../../components/ui/Button";
 
 export const DestinationDetail = () => {
   const { id } = useParams();
   const [destination, setDestination] = useState(null);
+
+  const navigate = useNavigate();
 
   const getDestination = async () => {
     try {
@@ -24,7 +27,7 @@ export const DestinationDetail = () => {
   return (
     <>
       <div className="max-w-7xl mx-auto px-4 min-h-screen">
-        <div className="flex flex-col lg:gap-6 my-4">
+        <div className="flex flex-col lg:gap-2 my-4">
           <div className="flex gap-2 bg-white border-b-2 p-4 mb-4">
             <Link
               to="/admin/destination"
@@ -34,6 +37,14 @@ export const DestinationDetail = () => {
             </Link>
             <p>/</p>
             <p className="text-slate-700 font-bold">{destination?.title}</p>
+          </div>
+          <div className="flex mx-4 justify-end w-fit">
+            <Button
+              className="bg-slate-700 hover:bg-slate-500 text-white"
+              onClick={() => navigate("/admin/destination/edit-destination")}
+            >
+              Edit Destination
+            </Button>
           </div>
           <div className="flex">
             <div className="flex  gap-8 shadow rounded-xl min-h-[300px] p-4 m-4 border">
