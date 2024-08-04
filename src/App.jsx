@@ -54,7 +54,7 @@ function App() {
                 <Route index element={<DestinationList />} />
                 <Route path=":id" element={<DestinationDetail />} />
                 <Route path="add-destination" element={<CreateDestination />} />
-                <Route path="edit-destination" element={<EditDestination />} />
+                <Route path="edit-destination/:id" element={<EditDestination />} />
               </Route>
             </Route>
 
