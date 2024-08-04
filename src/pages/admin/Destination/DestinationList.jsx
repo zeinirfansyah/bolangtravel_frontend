@@ -90,7 +90,7 @@ export const DestinationList = () => {
                   <div className="flex items-center justify-between w-full my-3 gap-4">
                     <div className="w-fit">
                       <Button
-                        className="bg-primary text-white"
+                        className="bg-slate-700 hover:bg-slate-500 text-white"
                         onClick={() => navigate("/admin/destination/add-destination")}
                       >
                         Add Destination
@@ -200,7 +200,7 @@ export const DestinationList = () => {
                       <button
                         onClick={() => setPage(page - 1)}
                         disabled={page === 1}
-                        className={`px-4 py-2 border rounded-md text-white bg-primary hover:bg-secondary disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
+                        className={`px-4 py-2 border rounded-md text-white bg-slate-700 hover:bg-slate-500 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
                       >
                         Previous
                       </button>
@@ -208,7 +208,7 @@ export const DestinationList = () => {
                       <button
                         onClick={() => setPage(page + 1)}
                         disabled={destinationList.length < limit}
-                        className={`px-4 py-2 border rounded-md text-white bg-primary hover:bg-secondary disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
+                        className={`px-4 py-2 border rounded-md text-white bg-slate-700 hover:bg-slate-500 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
                       >
                         Next
                       </button>
