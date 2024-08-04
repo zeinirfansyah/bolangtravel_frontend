@@ -18,6 +18,7 @@ import { Booking } from "./pages/admin/Booking/Booking";
 import { CreateDestination } from "./pages/admin/Destination/CreateDestination";
 import { DestinationList } from "./pages/admin/Destination/DestinationList";
 import { DestinationDetail } from "./pages/admin/Destination/DestinationDetail";
+import { EditDestination } from "./pages/admin/Destination/EditDestination";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
                 <Route index element={<DestinationList />} />
                 <Route path=":id" element={<DestinationDetail />} />
                 <Route path="add-destination" element={<CreateDestination />} />
+                <Route path="edit-destination" element={<EditDestination />} />
               </Route>
             </Route>
 
