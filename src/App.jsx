@@ -55,8 +55,8 @@ function App() {
                 <Route path=":id" element={<DestinationDetail />} />
                 <Route path="add-destination" element={<CreateDestination />} />
                 <Route path="edit-destination/:id" element={<EditDestination />} />
+              </Route>
             </Route>
-
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
