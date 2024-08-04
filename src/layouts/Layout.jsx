@@ -6,21 +6,14 @@ import {
   Book,
   BookDashed,
   BookDownIcon,
-  CircleUserRound,
   LucideLayoutDashboard,
   TreePalm,
   TreePine,
   User,
-  User2Icon,
-  UserSquare2Icon,
 } from "lucide-react";
-import { useAuthStore } from "../stores/authStore";
 
 export const Layout = ({ children }) => {
   const location = useLocation();
-
-  const { user } = useAuthStore((state) => state);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
@@ -30,19 +23,12 @@ export const Layout = ({ children }) => {
       {location.pathname.includes("/admin") ? (
         <>
           <div className="flex">
-            <div className="w-1/5">
-              <div className="px-6 pt-7 flex">
+            <div className="w-1/5 bg-slate-800 text-white">
+              <div className="flex flex-col gap-1 px-6 pt-7">
+                <p className="text-xs text-gray-400">Desktop Mode</p>
                 <h1 className="text-gray-400">Admin Dashboard</h1>
               </div>
               <hr className="mx-auto border-gray-300 my-6" />
-              <div className="px-6 flex gap-3 justify-center items-center">
-                <UserSquare2Icon size={64} className="stroke-1 text-gray-500" />
-                <div className="flex flex-col">
-                  <h1 className="text-xl font-semibold">{user?.fullname}</h1>
-                  <p className="text-gray-400">{user?.email}</p>
-                </div>
-              </div>
-              <hr className="w-[90%] mx-auto border-gray-600 my-6" />
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col px-6">
                   <h3 className="text-sm">Master</h3>
@@ -95,11 +81,16 @@ export const Layout = ({ children }) => {
               </div>
             </div>
             <div className="w-full">
-              <Header />
-              <section id="content" className="min-h-[90vh] text-dark">
+              <Header className="" />
+              <section
+                id="content"
+                className="min-h-[90vh] text-dark overflow-y-auto"
+              >
                 {children}
               </section>
-              <Footer />
+              <footer className="flex items-center p-4 bg-white border-t-2 border-pureGray">
+                <p className="text-gray-400">Copyright 2024 BolangTravel</p>
+              </footer>
             </div>
           </div>
         </>
