@@ -49,9 +49,11 @@ function App() {
             <Route path="/admin" element={<ProtectedRoute role="admin" />}>
               <Route index element={<Booking />} />
               <Route path="booking" element={<Booking />} />
-              <Route path="destination" element={<DestinationList />} />
-              <Route path="destination/:id" element={<DestinationDetail />} />
-              <Route path="add-destination" element={<CreateDestination />} />
+              <Route path="destination">
+                <Route index element={<DestinationList />} />
+                <Route path=":id" element={<DestinationDetail />} />
+                <Route path="add-destination" element={<CreateDestination />} />
+              </Route>
             </Route>
 
             <Route path="/not-found" element={<NotFound />} />

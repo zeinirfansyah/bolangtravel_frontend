@@ -3,15 +3,14 @@ import dayjs from "dayjs";
 import Toast from "../../../components/ui/Toast";
 import { Input } from "../../../components/ui/Input";
 import SelectOption from "../../../components/ui/SelectOption";
-import { DOMAIN_URL, axiosInstance } from "../../../hooks/useApi";
+import { axiosInstance } from "../../../hooks/useApi";
 import { Button } from "../../../components/ui/Button";
-import { Edit, Eye, Trash } from "lucide-react";
+import { Eye, Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../stores/authStore";
 
 export const DestinationList = () => {
   const [destinationList, setDestinationList] = useState([]);
-  const [destinationLocation, setDestinationLocation] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(8);
   const [search, setSearch] = useState("");
@@ -56,11 +55,14 @@ export const DestinationList = () => {
 
   const handleDelete = async (destinationId) => {
     try {
-      const response = await axiosInstance.delete(`/destination/${destinationId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axiosInstance.delete(
+        `/destination/${destinationId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.status === 200 || response.status === 201) {
         setSet(!set);
@@ -85,8 +87,16 @@ export const DestinationList = () => {
                       <Toast text={error} backgroundColor="bg-red-200" />
                     )}
                   </div>
-                  <div className="flex w-full my-3 gap-4">
-                    <div className="w-full">
+                  <div className="flex items-center justify-between w-full my-3 gap-4">
+                    <div className="w-fit">
+                      <Button
+                        className="bg-slate-700 hover:bg-slate-500 text-white"
+                        onClick={() => navigate("/admin/destination/add-destination")}
+                      >
+                        Add Destination
+                      </Button>
+                    </div>
+                    <div className="w-[40%]">
                       <Input
                         placeholder="Search destination"
                         onChange={(e) => {
@@ -190,7 +200,7 @@ export const DestinationList = () => {
                       <button
                         onClick={() => setPage(page - 1)}
                         disabled={page === 1}
-                        className={`px-4 py-2 border rounded-md text-white bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
+                        className={`px-4 py-2 border rounded-md text-white bg-slate-700 hover:bg-slate-500 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
                       >
                         Previous
                       </button>
@@ -198,7 +208,7 @@ export const DestinationList = () => {
                       <button
                         onClick={() => setPage(page + 1)}
                         disabled={destinationList.length < limit}
-                        className={`px-4 py-2 border rounded-md text-white bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
+                        className={`px-4 py-2 border rounded-md text-white bg-slate-700 hover:bg-slate-500 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200`}
                       >
                         Next
                       </button>
