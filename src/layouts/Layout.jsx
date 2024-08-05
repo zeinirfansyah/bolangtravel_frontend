@@ -39,7 +39,7 @@ export const Layout = ({ children }) => {
                     </li>
                     <li className="py-3 px-2 flex gap-2 items-center">
                       <BookDashed size={18} />
-                      <Link to="/admin">About Us</Link>
+                      <Link to="/admin/guide">Guide Book</Link>
                     </li>
                   </ul>
                 </div>
@@ -52,11 +52,7 @@ export const Layout = ({ children }) => {
                     </li>
                     <li className="px-2 py-3 flex gap-2 items-center">
                       <TreePine size={18} />
-                      <Link to="/admin/destination">Travel Packages</Link>
-                    </li>
-                    <li className="px-2 py-3 flex gap-2 items-center">
-                      <BookDownIcon size={18} />
-                      <Link to="/admin/destination">Package Categories</Link>
+                      <Link to="/admin/travel-package">Travel Packages</Link>
                     </li>
                   </ul>
                 </div>
@@ -74,7 +70,7 @@ export const Layout = ({ children }) => {
                   <ul>
                     <li className="px-2 py-3 flex gap-2 items-center">
                       <User size={18} />
-                      <Link to="/admin/booking">User Data</Link>
+                      <Link to="/admin/user-data">User Data</Link>
                     </li>
                   </ul>
                 </div>
