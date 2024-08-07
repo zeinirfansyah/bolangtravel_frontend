@@ -5,10 +5,7 @@ import SelectOption from "../../../components/ui/SelectOption";
 import { Link, useNavigate } from "react-router-dom";
 import Toast from "../../../components/ui/Toast";
 import { useAuthStore } from "../../../stores/authStore";
-import axios from "axios";
-
-// lucide
-import { Eye, LucideArrowBigDownDash, Plus, Trash } from "lucide-react";
+import {Plus } from "lucide-react";
 import { axiosInstance } from "../../../hooks/useApi";
 
 const CreatePackage = () => {
