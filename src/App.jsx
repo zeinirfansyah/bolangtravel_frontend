@@ -20,6 +20,7 @@ import { DestinationList } from "./pages/admin/Destination/DestinationList";
 import { DestinationDetail } from "./pages/admin/Destination/DestinationDetail";
 import { EditDestination } from "./pages/admin/Destination/EditDestination";
 import { PackageList } from "./pages/admin/TravelPackage/PackageList";
+import CreatePackage from "./pages/admin/TravelPackage/CreatePackage";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
               </Route>
               <Route path="travel-package">
                 <Route index element={<PackageList />} />
+                <Route path="add-package" element={<CreatePackage />} />
               </Route>
             </Route>
             <Route path="/not-found" element={<NotFound />} />
