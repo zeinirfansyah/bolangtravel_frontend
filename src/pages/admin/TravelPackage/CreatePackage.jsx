@@ -5,7 +5,7 @@ import SelectOption from "../../../components/ui/SelectOption";
 import { Link, useNavigate } from "react-router-dom";
 import Toast from "../../../components/ui/Toast";
 import { useAuthStore } from "../../../stores/authStore";
-import {Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { axiosInstance } from "../../../hooks/useApi";
 
 const CreatePackage = () => {
@@ -22,7 +22,7 @@ const CreatePackage = () => {
       agenda: "",
     },
   ]);
-  const [packageDestinations, setPackageDestinations] = useState([]);
+  const [packageDestinations, setPackageDestinations] = useState([""]);
   const [thumbnailUrl, setThumbnailUrl] = useState("Thumbnail");
   const [packageThumbnail, setPackageThumbnail] = useState(null);
   const [isAvailable, setIsAvailable] = useState("true");
@@ -50,10 +50,6 @@ const CreatePackage = () => {
     const newRundowns = [...packageRundowns];
     newRundowns[index][key] = value;
     setPackageRundowns(newRundowns);
-  };
-
-  const handleThumbnailChange = (e) => {
-    setPackageThumbnail(e.target.files[0]);
   };
 
   const fileUpload = async (event) => {
@@ -258,64 +254,70 @@ const CreatePackage = () => {
                 </div>
               </div>
             </div>
-            <div
-              className="flex flex-col lg:flex-row gap-10
-            justify-center w-full px-12"
-            >
-              <div className="flex flex-col gap-5 w-full">
-                <label htmlFor="destination">Package Destination</label>
-                {packageDestinations.map((destination, index) => (
-                  <div key={index}>
-                    <SelectOption
-                      id="destination"
-                      placeholder={"Destination"}
-                      options={destinationOption}
-                      default_value={destination}
-                      onChange={(e) =>
-                        handleDestinationChange(index, e.target.value)
-                      }
-                    />
+            <hr className="w-full my-6" />
+            <div className=" w-full px-12">
+              <div
+                className="flex flex-col lg:flex-row gap-10
+            justify-center border p-6 rounded-xl"
+              >
+                <div className="flex flex-col gap-5 w-full">
+                  <label htmlFor="destination">Package Destination</label>
+                  {packageDestinations.map((destination, index) => (
+                    <div key={index}>
+                      <SelectOption
+                        id="destination"
+                        placeholder={"Destination"}
+                        options={destinationOption}
+                        default_value={destination}
+                        firstOption={"Select Destination"}
+                        disabled={true}
+                        onChange={(e) =>
+                          handleDestinationChange(index, e.target.value)
+                        }
+                      />
+                    </div>
+                  ))}
+                  <div className="w-full">
+                    <Button
+                      type="button"
+                      onClick={handleAddDestination}
+                      className="outline-dashed outline-2 outline-slate-500 text-slate-700 hover:bg-slate-600 flex justify-center items-center gap-2 hover:text-white"
+                    >
+                      <Plus className="w-5 h-5" /> Add Destination
+                    </Button>
                   </div>
-                ))}
-                <div className="w-fit">
-                  <Button
-                    type="button"
-                    onClick={handleAddDestination}
-                    className="bg-slate-700 text-white hover:bg-slate-600 flex items-center gap-2"
-                  >
-                    <Plus className="w-5 h-5" /> Add Destination
-                  </Button>
                 </div>
-              </div>
-              <div className="flex flex-col gap-5 w-full">
-                {packageRundowns.map((rundown, index) => (
-                  <div key={index}>
-                    <input
-                      type="text"
-                      placeholder="Rundown Title"
-                      value={rundown.title}
-                      onChange={(e) =>
-                        handleRundownChange(index, "title", e.target.value)
-                      }
-                    />
-                    <input
-                      type="text"
-                      placeholder="Rundown Agenda"
-                      value={rundown.agenda}
-                      onChange={(e) =>
-                        handleRundownChange(index, "agenda", e.target.value)
-                      }
-                    />
+                <div className="flex flex-col gap-5 w-full">
+                <label htmlFor="rundown">Package Agenda</label>
+                  {packageRundowns.map((rundown, index) => (
+                    <div key={index} className="flex flex-col gap-2 border p-6">
+                      <Input
+                        type="text"
+                        placeholder="Rundown Title"
+                        value={rundown.title}
+                        onChange={(e) =>
+                          handleRundownChange(index, "title", e.target.value)
+                        }
+                      />
+                      <Input
+                        type="text"
+                        placeholder="Rundown Agenda"
+                        value={rundown.agenda}
+                        onChange={(e) =>
+                          handleRundownChange(index, "agenda", e.target.value)
+                        }
+                      />
+                    </div>
+                  ))}
+                  <div className="w-full">
+                    <Button
+                      type="button"
+                      onClick={handleAddRundown}
+                      className="outline-dashed outline-2 outline-slate-500 text-slate-700 hover:bg-slate-600 flex justify-center items-center gap-2 hover:text-white"
+                    >
+                      <Plus className="w-5 h-5" /> Add Rundown
+                    </Button>
                   </div>
-                ))}
-                <div className="w-fit">
-                  <Button
-                    type="button"
-                    onClick={handleAddRundown}
-                    className="bg-slate-700 text-white hover:bg-slate-600 flex items-center gap-2"
-                  >
-                    <Plus className="w-5 h-5" /> Add Rundown
-                  </Button>
                 </div>
               </div>
             </div>
