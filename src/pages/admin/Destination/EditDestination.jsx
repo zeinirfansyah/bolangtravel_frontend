@@ -114,13 +114,6 @@ export const EditDestination = () => {
             <p className="text-slate-700 font-bold">Edit Destination</p>
           </div>
           <form className="flex flex-col justify-center items-center gap-5 ">
-            {error && (
-              <Toast
-                text={error}
-                backgroundColor="bg-red-200"
-                textColor="text-red-700"
-              />
-            )}
             <div
               className="flex flex-col lg:flex-row gap-10
             justify-center w-full px-12"
@@ -251,6 +244,13 @@ export const EditDestination = () => {
                 Update
               </Button>
             </div>
+            {error && (
+              <Toast
+                text={error}
+                backgroundColor="bg-red-200"
+                textColor="text-red-700"
+              />
+            )}
           </form>
         </div>
       </div>

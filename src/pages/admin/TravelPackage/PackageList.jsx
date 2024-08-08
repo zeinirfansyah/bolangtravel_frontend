@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import dayjs from "dayjs";
 import Toast from "../../../components/ui/Toast";
 import { Input } from "../../../components/ui/Input";
 import SelectOption from "../../../components/ui/SelectOption";
@@ -16,6 +15,7 @@ export const PackageList = () => {
   const [search, setSearch] = useState("");
   const [set, setSet] = useState(false);
   const [error, setError] = useState("");
+  const [filterByCategory, setFilterByCategory] = useState("");
   const { token } = useAuthStore((state) => state);
 
   const navigate = useNavigate();
@@ -27,6 +27,7 @@ export const PackageList = () => {
         {
           params: {
             search: search,
+            category: filterByCategory,
           },
         }
       );
@@ -39,7 +40,7 @@ export const PackageList = () => {
 
   useEffect(() => {
     getAllPackages();
-  }, [page, limit, search, set]);
+  }, [page, limit, search, filterByCategory, set]);
 
   /**
    * REMINDER:
@@ -73,6 +74,13 @@ export const PackageList = () => {
     }
   };
 
+  const category = ["Family", "Honeymoon", "Solo"];
+
+  const categoryList = category.map((category) => ({
+    value: category,
+    label: category,
+  }));
+
   return (
     <>
       <div className="flex bg-slate-100">
@@ -97,15 +105,26 @@ export const PackageList = () => {
                         Add Package
                       </Button>
                     </div>
-                    <div className="w-[40%]">
-                      <Input
-                        placeholder="Search package"
-                        onChange={(e) => {
-                          setSearch(e.target.value);
-                        }}
-                        value={search}
-                        className={"border-2"}
-                      />
+                    <div className="flex gap-4 w-1/2">
+                      <div className="w-1/2">
+                        <Input
+                          placeholder="Search package"
+                          onChange={(e) => {
+                            setSearch(e.target.value);
+                          }}
+                          value={search}
+                          className={"border-2"}
+                        />
+                      </div>
+                      <div className="w-1/2">
+                        <SelectOption
+                          options={categoryList}
+                          default_value=""
+                          onChange={(e) => setFilterByCategory(e.target.value)}
+                          firstOption="All Category"
+                          className={"border-2"}
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="w-full overflow-x-auto rounded-xl ">

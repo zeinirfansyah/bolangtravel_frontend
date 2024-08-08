@@ -142,13 +142,6 @@ const CreatePackage = () => {
             onSubmit={handleSubmit}
             className="flex flex-col justify-center items-center gap-5 "
           >
-            {error && (
-              <Toast
-                text={error}
-                backgroundColor="bg-red-200"
-                textColor="text-red-700"
-              />
-            )}
             <div
               className="flex flex-col lg:flex-row gap-10
             justify-center w-full px-12"
@@ -288,7 +281,7 @@ const CreatePackage = () => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-5 w-full">
-                <label htmlFor="rundown">Package Agenda</label>
+                  <label htmlFor="rundown">Package Agenda</label>
                   {packageRundowns.map((rundown, index) => (
                     <div key={index} className="flex flex-col gap-2 border p-6">
                       <Input
@@ -335,6 +328,13 @@ const CreatePackage = () => {
                 Continue
               </Button>
             </div>
+            {error && (
+              <Toast
+                text={error}
+                backgroundColor="bg-red-200"
+                textColor="text-red-700"
+              />
+            )}
           </form>
         </div>
       </div>
