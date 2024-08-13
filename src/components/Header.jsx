@@ -29,13 +29,13 @@ export const Header = () => {
     }
   };
 
-  const stick = () => {
-    if (!location.pathname.includes("/admin")) {
-      return "sticky top-0";
-    } 
+  // const stick = () => {
+  //   if (!location.pathname.includes("/admin")) {
+  //     return "sticky top-0";
+  //   } 
 
-    return "";
-  };
+  //   return "";
+  // };
 
   const toggleDropdown = () => {
     setIsProfileOpen(!isProfileOpen);
@@ -50,7 +50,7 @@ export const Header = () => {
   };
 
   return (
-    <header className={` ${stick()} z-30 shadow  ${backgroundColor()}`}>
+    <header className={`sticky top-0 z-30 shadow  ${backgroundColor()}`}>
       <div className="max-w-7xl mx-auto">
         <nav className="Navbar lg:flex justify-between gap-20 items-center py-6 mx-4">
           <div className="flex flex-col lg:flex-row lg:gap-12">
