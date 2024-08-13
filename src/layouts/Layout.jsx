@@ -76,11 +76,11 @@ export const Layout = ({ children }) => {
                 </div>
               </div>
             </div>
-            <div className="w-full">
+            <div className="w-full h-screen overflow-y-auto">
               <Header className="" />
               <section
                 id="content"
-                className="min-h-[90vh] text-dark overflow-y-auto"
+                className="text-dark "
               >
                 {children}
               </section>
