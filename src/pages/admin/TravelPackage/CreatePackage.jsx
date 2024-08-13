@@ -5,7 +5,7 @@ import SelectOption from "../../../components/ui/SelectOption";
 import { Link, useNavigate } from "react-router-dom";
 import Toast from "../../../components/ui/Toast";
 import { useAuthStore } from "../../../stores/authStore";
-import { Plus } from "lucide-react";
+import { Minus, Plus, Trash } from "lucide-react";
 import { axiosInstance } from "../../../hooks/useApi";
 
 const CreatePackage = () => {
@@ -22,7 +22,9 @@ const CreatePackage = () => {
       agenda: "",
     },
   ]);
+  const [rundownCount, setRundownCount] = useState(1);
   const [packageDestinations, setPackageDestinations] = useState([""]);
+  const [destinationCount, setDestinationCount] = useState(1);
   const [thumbnailUrl, setThumbnailUrl] = useState("Thumbnail");
   const [packageThumbnail, setPackageThumbnail] = useState(null);
   const [isAvailable, setIsAvailable] = useState("true");
@@ -34,6 +36,7 @@ const CreatePackage = () => {
 
   const handleAddDestination = () => {
     setPackageDestinations([...packageDestinations, ""]);
+    setDestinationCount(destinationCount + 1);
   };
 
   const handleDestinationChange = (index, value) => {
@@ -42,8 +45,23 @@ const CreatePackage = () => {
     setPackageDestinations(newDestinations);
   };
 
+  const handleDeleteDestinationForm = (indexToRemove) => {
+    const newDestinations = [...packageDestinations];
+    newDestinations.splice(indexToRemove, 1);
+    setPackageDestinations(newDestinations);
+    setDestinationCount(destinationCount - 1);
+  };
+
   const handleAddRundown = () => {
     setPackageRundowns([...packageRundowns, { title: "", agenda: "" }]);
+    setRundownCount(rundownCount + 1);
+  };
+
+  const handleDeleteRundownForm = (indexToRemove) => {
+    const newRundowns = [...packageRundowns];
+    newRundowns.splice(indexToRemove, 1);
+    setPackageRundowns(newRundowns);
+    setRundownCount(rundownCount - 1);
   };
 
   const handleRundownChange = (index, key, value) => {
@@ -249,67 +267,115 @@ const CreatePackage = () => {
             </div>
             <hr className="w-full my-6" />
             <div className=" w-full px-12">
-              <div
-                className="flex flex-col lg:flex-row gap-10
-            justify-center border p-6 rounded-xl"
-              >
+              <div className="flex flex-col lg:flex-row gap-10 justify-center border p-6 rounded-xl">
                 <div className="flex flex-col gap-5 w-full">
-                  <label htmlFor="destination">Package Destination</label>
-                  {packageDestinations.map((destination, index) => (
-                    <div key={index}>
-                      <SelectOption
-                        id="destination"
-                        placeholder={"Destination"}
-                        options={destinationOption}
-                        default_value={destination}
-                        firstOption={"Select Destination"}
-                        disabled={true}
-                        onChange={(e) =>
-                          handleDestinationChange(index, e.target.value)
-                        }
-                      />
+                  <div className="flex gap-2 justify-end">
+                    <div>
+                      <Button
+                        type="button"
+                        onClick={handleDeleteDestinationForm}
+                        className="w-fit disabled:cursor-not-allowed disabled:opacity-50"
+                        disabled={destinationCount === 0}
+                      >
+                        {destinationCount > 1 ? (
+                          <Minus className="w-5 h-5" />
+                        ) : (
+                          <Trash className="w-5 h-5" />
+                        )}
+                      </Button>
                     </div>
-                  ))}
-                  <div className="w-full">
-                    <Button
-                      type="button"
-                      onClick={handleAddDestination}
-                      className="outline-dashed outline-2 outline-slate-500 text-slate-700 hover:bg-slate-600 flex justify-center items-center gap-2 hover:text-white"
-                    >
-                      <Plus className="w-5 h-5" /> Add Destination
-                    </Button>
+                    <div className="flex items-center border rounded">
+                      <p className="text-navy font-semibold  mx-4">
+                        {destinationCount} Destination
+                      </p>
+                    </div>
+                    <div>
+                      <Button
+                        type="button"
+                        onClick={handleAddDestination}
+                        className="w-fit"
+                        disabled={destinationCount === 8}
+                      >
+                        <Plus className="w-5 h-5" />
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-5 w-full">
+                    <label htmlFor="destination">Package Destination</label>
+                    {packageDestinations.map((destination, index) => (
+                      <div key={index}>
+                        <SelectOption
+                          id="destination"
+                          placeholder={"Destination"}
+                          options={destinationOption}
+                          default_value={destination}
+                          firstOption={"Select Destination"}
+                          disabled={true}
+                          onChange={(e) =>
+                            handleDestinationChange(index, e.target.value)
+                          }
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
                 <div className="flex flex-col gap-5 w-full">
-                  <label htmlFor="rundown">Package Agenda</label>
-                  {packageRundowns.map((rundown, index) => (
-                    <div key={index} className="flex flex-col gap-2 border p-6">
-                      <Input
-                        type="text"
-                        placeholder="Rundown Title"
-                        value={rundown.title}
-                        onChange={(e) =>
-                          handleRundownChange(index, "title", e.target.value)
-                        }
-                      />
-                      <Input
-                        type="text"
-                        placeholder="Rundown Agenda"
-                        value={rundown.agenda}
-                        onChange={(e) =>
-                          handleRundownChange(index, "agenda", e.target.value)
-                        }
-                      />
+                  <div className="flex gap-2 justify-end">
+                    <div>
+                      <Button
+                        type="button"
+                        onClick={handleDeleteRundownForm}
+                        className="w-fit disabled:cursor-not-allowed disabled:opacity-50"
+                        disabled={rundownCount === 0}
+                      >
+                        {rundownCount > 1 ? (
+                          <Minus className="w-5 h-5" />
+                        ) : (
+                          <Trash className="w-5 h-5" />
+                        )}
+                      </Button>
                     </div>
-                  ))}
-                  <div className="w-full">
-                    <Button
-                      type="button"
-                      onClick={handleAddRundown}
-                      className="outline-dashed outline-2 outline-slate-500 text-slate-700 hover:bg-slate-600 flex justify-center items-center gap-2 hover:text-white"
-                    >
-                      <Plus className="w-5 h-5" /> Add Rundown
-                    </Button>
+                    <div className="flex items-center border rounded">
+                      <p className="text-navy font-semibold  mx-4">
+                        {rundownCount} Agenda
+                      </p>
+                    </div>
+                    <div>
+                      <Button
+                        type="button"
+                        onClick={handleAddRundown}
+                        className="w-fit"
+                        disabled={rundownCount === 8}
+                      >
+                        <Plus className="w-5 h-5" />
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-5 w-full">
+                    <label htmlFor="rundown">Package Agenda</label>
+                    {packageRundowns.map((rundown, index) => (
+                      <div
+                        key={index}
+                        className="flex flex-col gap-2 border p-6"
+                      >
+                        <Input
+                          type="text"
+                          placeholder="Rundown Title"
+                          value={rundown.title}
+                          onChange={(e) =>
+                            handleRundownChange(index, "title", e.target.value)
+                          }
+                        />
+                        <Input
+                          type="text"
+                          placeholder="Rundown Agenda"
+                          value={rundown.agenda}
+                          onChange={(e) =>
+                            handleRundownChange(index, "agenda", e.target.value)
+                          }
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
