@@ -64,7 +64,7 @@ export const PackageDetail = () => {
                   src={`${DOMAIN_URL}/${product?.destinations[1]?.thumbnail}`}
                   data-size="auto"
                   alt={product?.destinations[1]?.thumbnail}
-                  className="lazyload lazyloaded rounded-xl object-cover max-h-[260px]"
+                  className="lazyload lazyloaded rounded-xl object-cover w-full max-h-[260px]"
                 />
               )}
 
@@ -73,7 +73,7 @@ export const PackageDetail = () => {
                   src={`${DOMAIN_URL}/${product?.destinations[2]?.thumbnail}`}
                   data-size="auto"
                   alt={product?.destinations[2]?.thumbnail}
-                  className="lazyload lazyloaded rounded-xl object-cover max-h-[260px]"
+                  className="lazyload lazyloaded rounded-xl object-cover w-full max-h-[260px]"
                 />
               )}
             </div>
