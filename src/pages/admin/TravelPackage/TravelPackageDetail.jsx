@@ -1,5 +1,5 @@
 import React from "react";
 
-export const PackageDetail = () => {
+export const TravelPackageDetail = () => {
   return <div>PackageDetail</div>;
 };

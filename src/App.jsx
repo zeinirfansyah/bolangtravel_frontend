@@ -9,6 +9,7 @@ import { About } from "./pages/About";
 import { PackageCatalog } from "./pages/PackageCatalog";
 import { Profile } from "./pages/Profile";
 import { PackageDetail } from "./pages/PackageDetail";
+import { TravelPackageDetail } from "./pages/admin/TravelPackage/TravelPackageDetail";
 import { PurchaseHistory } from "./pages/PurchaseHistory";
 import { Payment } from "./pages/Payment";
 import { CompletedBooking } from "./pages/CompletedBooking";
@@ -60,6 +61,7 @@ function App() {
               </Route>
               <Route path="travel-package">
                 <Route index element={<PackageList />} />
+                <Route path=":id" element={<TravelPackageDetail />} />
                 <Route path="add-package" element={<CreatePackage />} />
               </Route>
             </Route>
