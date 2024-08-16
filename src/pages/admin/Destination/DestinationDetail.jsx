@@ -47,7 +47,7 @@ export const DestinationDetail = () => {
             </Button>
           </div>
           <div className="flex">
-            <div className="flex  gap-8 shadow rounded-xl min-h-[300px] p-4 m-4 border">
+            <div className="flex w-full gap-8 shadow rounded-xl min-h-[300px] p-4 m-4 border">
               <div className="w-1/2">
                 <h1 className="text-2xl lg:text-3xl font-semibold">
                   {destination?.title}
