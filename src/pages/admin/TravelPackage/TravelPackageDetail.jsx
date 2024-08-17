@@ -156,15 +156,15 @@ export const TravelPackageDetail = () => {
               )}
             </div>
             <div className="flex flex-col w-full gap-4 shadow rounded-xl min-h-[300px] p-4 m-4 border">
-              <h1 className="text-2xl font-semibold">
-                Destinations
-              </h1>
+              <h1 className="text-2xl font-semibold">Destinations</h1>
               <hr />
               {packageDetail && packageDetail?.destinations && (
                 <div className={`grid grid-cols-3 gap-4`}>
                   {packageDetail?.destinations.map((destination) => (
                     <div key={destination?.id}>
-                      <DestinationCard destination={destination} />
+                      <Link to={`/admin/destination/${destination?.id}`}>
+                        <DestinationCard destination={destination} />
+                      </Link>
                     </div>
                   ))}
                 </div>
