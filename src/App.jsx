@@ -22,6 +22,7 @@ import { DestinationDetail } from "./pages/admin/Destination/DestinationDetail";
 import { EditDestination } from "./pages/admin/Destination/EditDestination";
 import { PackageList } from "./pages/admin/TravelPackage/PackageList";
 import CreatePackage from "./pages/admin/TravelPackage/CreatePackage";
+import EditPackage  from "./pages/admin/TravelPackage/EditPackage";
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
                 <Route index element={<PackageList />} />
                 <Route path=":id" element={<TravelPackageDetail />} />
                 <Route path="add-package" element={<CreatePackage />} />
+                <Route path="edit-package/:id" element={<EditPackage />} />
               </Route>
             </Route>
             <Route path="/not-found" element={<NotFound />} />
